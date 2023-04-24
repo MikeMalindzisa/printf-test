@@ -66,7 +66,7 @@ int main(void)
 
 ## Authors
 
--   Maqhawe Mike Malindzisa
--   Grace Bamidele
+-   Maqhawe Mike Malindzisa - machaweml@gmail.com
+-   Grace Bamidele -gbamidele23@gmail.com
 
 
