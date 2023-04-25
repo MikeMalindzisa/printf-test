@@ -17,7 +17,7 @@ return (NULL);
 
 hex_str = malloc(_strlen(str) * 4 + 1);
 
-if(!hex_str)
+if (!hex_str)
 return (NULL);
 
 for (i = 0, j = 0; str[i]; i++, j++)
@@ -46,7 +46,7 @@ return (hex_str);
 
 int is_printable(char c)
 {
-return c >= 32 && c <= 126;
+return (c >= 32 && c <= 126);
 }
 
 /**
@@ -78,33 +78,6 @@ value /= 16;
 str[sizeof(void *) * 2 + 2] = '\0';
 
 return (str);
-}
-/**
-* convert_rev - Reverses a string
-*
-* @ap: List of arguments from _printf
-*
-* Return: Pointer to reversed string
-*/
-char *convert_rev(va_list ap)
-{
-char *s = va_arg(ap, char *);
-int len, i, j;
-char temp;
-
-if (s == NULL)
-return (NULL);
-
-len = strlen(s);
-j = len - 1;
-for (i = 0; i < j; i++, j--)
-{
-temp = s[i];
-s[i] = s[j];
-s[j] = temp;
-}
-
-return (s);
 }
 /**
 * convert_rot13 - Encodes a string using rot13

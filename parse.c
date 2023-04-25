@@ -27,14 +27,12 @@ buff = handler(format[i], ap);
 if (buff == NULL)
 return (-1);
 count += puts(buff);
-free(buff);
 }
 }
 else
 count += _putchar(format[i]);
 i++;
 }
-
 return (count);
 }
 

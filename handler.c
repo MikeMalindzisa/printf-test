@@ -7,6 +7,8 @@
 #include "convertors/convert_octal.c"
 #include "convertors/convert_hex.c"
 #include "convertors/convert_misc.c"
+#include "convertors/convert_to_base.c"
+#include "convertors/convert_reverse.c"
 /**
 * handler - function pointer to corresponding function
 * @format: conversion specifier
@@ -43,6 +45,8 @@ output = converter[i].convert(ap);
 break;
 }
 }
+if (output == NULL)
+	output = handle_unknown(format, ap);
 return (output);
 }
 

@@ -1,11 +1,14 @@
 #include "../main.h"
 
 /**
- * convert_to_base - take three args  and return a pointer to the string to be converted
+ * convert_to_base - take three args and return
+ * a pointer to the string to be converted
  * @num: number to convert
  * @base: base to convert to
- * @uppercase: hex case to ue
- * */
+ * @uppercase: case determinant
+ *
+ * Return: pointer
+ */
 
 char *convert_to_base(unsigned int num, int base, int uppercase)
 {
@@ -17,13 +20,11 @@ const char *digits = uppercase ? "012345678ABCDEF" : "012345678abcdef";
 ptr = &buf[sizeof(buf) - 1];
 *ptr = '\0';
 
-do
-{
+do {
 *--ptr = digits[num % base];
 num /= base;
-}
-while (num != 0);
+} while (num != 0);
 
-return ptr;
+return (ptr);
 
 }

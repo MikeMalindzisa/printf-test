@@ -13,7 +13,7 @@ return (write(1, &c, 1));
 }
 
 /**
-* str_len - Returns the length of a string.
+* _strlen - Returns the length of a string.
 * @s: pointer to string.
 *
 * Return: length of string.
@@ -29,18 +29,21 @@ return (i);
 }
 
 /**
- * Reverses the characters in a string.
- * @param s the string to reverse
+ * reverse_string - Reverses the characters
+ * in a string.
+ * @s: the string to reverse
  */
-void reverse_string(char *s) {
-    int i, j;
-    char temp;
+void reverse_string(char *s)
+{
+	int i, j;
+	char temp;
 
-    for (i = 0, j = strlen(s) - 1; i < j; i++, j--) {
-        temp = s[i];
-        s[i] = s[j];
-        s[j] = temp;
-    }
+for (i = 0, j = strlen(s) - 1; i < j; i++, j--)
+{
+temp = s[i];
+s[i] = s[j];
+s[j] = temp;
+}
 }
 
 
