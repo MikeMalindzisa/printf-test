@@ -25,7 +25,7 @@ num /= 10;
 }
 
 buffer[i] = '\0';
-len = str_len(buffer);
+len = strlen(buffer);
 
 if (precision > len)
 {

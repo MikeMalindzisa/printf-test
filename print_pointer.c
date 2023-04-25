@@ -6,7 +6,7 @@
 * @flags: struct containing flags modifying the output formatting
 * Return: number of characters printed
 */
-int print_pointer(va_list valist, modifier_t flags)
+int print_pointer(va_list valist, mode_t flags)
 {
 unsigned long int ptr = va_arg(valist, unsigned long int);
 char *prefix = "0x";
@@ -21,7 +21,7 @@ if (flags.hash_flag)
 chars_printed += print_buffer(prefix, prefix_len, flags);
 
 /* convert pointer value to hex and print */
-chars_printed += print_hex_base((unsigned long int)ptr, 16,
+chars_printed += print_hex((unsigned long int)ptr, 16,
 flags.precision, 0);
 
 return (chars_printed);

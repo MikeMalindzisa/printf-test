@@ -26,7 +26,7 @@ else
 buff = handler(format[i], ap);
 if (buff == NULL)
 return (-1);
-count += _puts(buff);
+count += puts(buff);
 free(buff);
 }
 }

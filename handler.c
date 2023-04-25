@@ -35,11 +35,11 @@ converter_t converter[] = {
 {NULL, NULL}
 };
 
-for (i = 0; converter[i].type != NULL; i++)
+for (i = 0; converter[i].specifier != NULL; i++)
 {
-if (*(converter[i].type) == format)
+if (*(converter[i].specifier) == format)
 {
-output = converter[i].func(ap);
+output = converter[i].convert(ap);
 break;
 }
 }

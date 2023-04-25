@@ -10,37 +10,45 @@ char *convert_non_printable(va_list arg)
 char *str = va_arg(arg, char *);
 int i, j;
 char *hex_str;
-char *new_str;
 
-if (str == NULL)
+if (!str)
 return (NULL);
 
-new_str = malloc(sizeof(char) * (_strlen(str) * 4 + 1));
-if (new_str == NULL)
+
+hex_str = malloc(_strlen(str) * 4 + 1);
+
+if(!hex_str)
 return (NULL);
 
-for (i = 0, j = 0; str[i] != '\0'; i++, j++)
+for (i = 0, j = 0; str[i]; i++, j++)
 {
-if (str[i] < 32 || str[i] >= 127)
+if (is_printable(str[i]))
 {
-hex_str = convert_to_hex(str[i]);
-if (hex_str == NULL)
-return (NULL);
-
-new_str[j] = '\\';
-new_str[j + 1] = 'x';
-new_str[j + 2] = hex_str[0];
-new_str[j + 3] = hex_str[1];
-j += 3;
-free(hex_str);
+hex_str[j] = str[i];
 }
 else
-new_str[j] = str[i];
+{
+hex_str[j++] = '\\';
+hex_str[j++] = 'x';
+hex_str = convert_hex(arg);
+}
 }
 
-new_str[j] = '\0';
-return (new_str);
+hex_str[j] = '\0';
+return (hex_str);
 }
+
+/**
+ * is_printable - checks if the ASCII value of the char is between 32 and 126;
+ * @c: Char to check
+ * Return: 1 if true else 0
+ */
+
+int is_printable(char c)
+{
+return c >= 32 && c <= 126;
+}
+
 /**
 * convert_address - Converts the void pointer into hexadecimal address
 * @ap: Argument pointer to traverse through variadic arguments.
@@ -51,17 +59,25 @@ char *convert_address(va_list ap)
 {
 unsigned long int p = va_arg(ap, unsigned long int);
 char *str = malloc(sizeof(char) * (17));
-char *result;
+const char *hex_digits = "0123456789abcdef";
+unsigned long int value = (unsigned long int) p;
+int i = 0;
 
 if (str == NULL)
 return (NULL);
-if (p == 0)
-return (_strdup("(nil)"));
-_strcpy(str, "0x");
-convert_base(str + 2, p, 16, 0);
-result = _strdup(str);
-free(str);
-return (result);
+
+
+str[0] = '0';
+str[1] = '1';
+
+for (i = 0; i < (int)sizeof(void *) * 2; i++)
+{
+str[sizeof(void *) * 2 - i + 1] = hex_digits[value % 16];
+value /= 16;
+}
+str[sizeof(void *) * 2 + 2] = '\0';
+
+return (str);
 }
 /**
 * convert_rev - Reverses a string
@@ -79,7 +95,7 @@ char temp;
 if (s == NULL)
 return (NULL);
 
-len = _strlen(s);
+len = strlen(s);
 j = len - 1;
 for (i = 0; i < j; i++, j--)
 {
@@ -99,7 +115,7 @@ return (s);
 char *convert_rot13(va_list list)
 {
 char *str = va_arg(list, char *);
-char *res = malloc(sizeof(char) * (_strlen(str) + 1));
+char *res = malloc(sizeof(char) * (strlen(str) + 1));
 int i;
 
 if (res == NULL)
